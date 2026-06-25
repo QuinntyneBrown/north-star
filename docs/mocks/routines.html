@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>North Star — Study Routines</title>
+<link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+<div class="mockbar">★ <b>North Star</b> · Study routines &amp; habits — mockup</div>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="logo">★</div><div class="name">North Star<small>FOLLOW YOUR STAR</small></div></div>
+    <nav class="nav">
+      <div class="nav-label">Maya's space</div>
+      <a href="dashboard-child.html"><span class="ico">🌟</span> Today</a>
+      <a class="active" href="routines.html"><span class="ico">✅</span> My Routines</a>
+      <a href="portfolio.html"><span class="ico">🎨</span> My Projects</a>
+      <a href="sports.html"><span class="ico">🏅</span> My Sports</a>
+      <a href="#"><span class="ico">🏆</span> My Rewards</a>
+      <div class="nav-label">Grown-ups</div>
+      <a href="dashboard-parent.html"><span class="ico">📊</span> Parent Home</a>
+      <a href="scholarships.html"><span class="ico">🔭</span> Scholarships</a>
+      <a href="resources.html"><span class="ico">📚</span> Resources</a>
+    </nav>
+    <div class="side-card"><b>Tip 💡</b><br />Small &amp; daily beats big &amp; rare. 20 focused minutes counts!</div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="greet"><h1>Study Routines ✅</h1><p>Build habits that compound year after year.</p></div>
+      <div class="tools">
+        <button class="btn btn-sm">⚙️ Edit routines</button>
+        <button class="btn btn-primary btn-sm">+ New routine</button>
+        <div class="avatar av-maya">M</div>
+      </div>
+    </header>
+
+    <main class="content">
+      <!-- Summary -->
+      <div class="grid cols-4">
+        <div class="card stat"><div class="k">🔥 Streak</div><div class="v">9 <small>days</small></div></div>
+        <div class="card stat"><div class="k">📅 This week</div><div class="v">86<small>%</small></div><div class="progress mt-1"><span style="width:86%"></span></div></div>
+        <div class="card stat"><div class="k">⭐ Stars this week</div><div class="v">210</div></div>
+        <div class="card stat"><div class="k">⏱️ Focus time</div><div class="v">3h 40m</div></div>
+      </div>
+
+      <div class="grid cols-2 mt-3" style="grid-template-columns: 1.5fr 1fr;">
+        <!-- Today + focus -->
+        <section class="card pad-lg">
+          <div class="section-title" style="margin:0 0 14px;"><h2>Today — Wed, Jun 25</h2><span class="badge badge-info">1 of 3 done</span></div>
+          <div class="task done"><div class="check">✓</div><div class="t-ico">📖</div><div class="grow"><div class="t-title">Read 20 minutes</div><div class="t-meta">Reading · every day</div></div><span class="badge badge-ok">Done</span></div>
+          <div class="task"><div class="check">✓</div><div class="t-ico">➗</div><div class="grow"><div class="t-title">Math facts — 10 questions</div><div class="t-meta">Math · weekdays</div></div><button class="btn btn-primary btn-sm">Start ▶</button></div>
+          <div class="task"><div class="check">✓</div><div class="t-ico">✍️</div><div class="grow"><div class="t-title">Free-write 5 minutes</div><div class="t-meta">Writing · every day</div></div><button class="btn btn-sm">Open</button></div>
+
+          <div class="card mt-3" style="background:linear-gradient(120deg, rgba(79,90,224,.06), rgba(167,139,250,.06)); border-style:dashed;">
+            <div class="between">
+              <div><div class="eyebrow">Focus mode</div><h3 style="margin-top:4px;">⏱️ 20:00 reading timer</h3><p class="muted tiny mt-1">Quiet, no distractions. Earn a bonus ⭐ for finishing.</p></div>
+              <button class="btn btn-star">Start focus</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Weekly grid -->
+        <section class="card">
+          <div class="section-title" style="margin:0 0 14px;"><h2>This week</h2><span class="link">History</span></div>
+          <table>
+            <thead><tr><th>Habit</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th><th>S</th></tr></thead>
+            <tbody>
+              <tr><td>📖 Read</td><td>✅</td><td>✅</td><td>✅</td><td>·</td><td>·</td><td>·</td><td>·</td></tr>
+              <tr><td>➗ Math</td><td>✅</td><td>✅</td><td>◻️</td><td>·</td><td>·</td><td>—</td><td>—</td></tr>
+              <tr><td>✍️ Write</td><td>✅</td><td>⛔</td><td>◻️</td><td>·</td><td>·</td><td>·</td><td>·</td></tr>
+              <tr><td>🧹 Tidy + plan</td><td>✅</td><td>✅</td><td>◻️</td><td>·</td><td>·</td><td>·</td><td>·</td></tr>
+            </tbody>
+          </table>
+          <p class="muted tiny mt-2">✅ done · ◻️ today · ⛔ missed (that's ok!) · — rest day</p>
+        </section>
+      </div>
+
+      <!-- My routines -->
+      <div class="section-title"><h2>My routines</h2><span class="link">Browse templates</span></div>
+      <div class="grid cols-3">
+        <div class="card">
+          <div class="between"><div class="tile-ico bg-star">📖</div><span class="chip on">Daily</span></div>
+          <h3 class="mt-2">Read 20 minutes</h3>
+          <p class="muted tiny mt-1">Builds vocabulary &amp; focus. Pick any book you love.</p>
+          <div class="between mt-2 tiny muted"><span>🔥 21-day best</span><span>+15 ⭐</span></div>
+        </div>
+        <div class="card">
+          <div class="between"><div class="tile-ico bg-mint">➗</div><span class="chip on">Weekdays</span></div>
+          <h3 class="mt-2">Math facts x10</h3>
+          <p class="muted tiny mt-1">Quick practice keeps skills sharp for contests later.</p>
+          <div class="between mt-2 tiny muted"><span>🔥 9-day best</span><span>+15 ⭐</span></div>
+        </div>
+        <div class="card">
+          <div class="between"><div class="tile-ico bg-grape">✍️</div><span class="chip on">Daily</span></div>
+          <h3 class="mt-2">Free-write 5 min</h3>
+          <p class="muted tiny mt-1">Writing muscle for future essays &amp; story contests.</p>
+          <div class="between mt-2 tiny muted"><span>🔥 12-day best</span><span>+10 ⭐</span></div>
+        </div>
+        <div class="card">
+          <div class="between"><div class="tile-ico bg-sky">🧹</div><span class="chip on">Daily</span></div>
+          <h3 class="mt-2">Tidy + plan tomorrow</h3>
+          <p class="muted tiny mt-1">2 minutes to set up an easy win tomorrow.</p>
+          <div class="between mt-2 tiny muted"><span>🔥 6-day best</span><span>+5 ⭐</span></div>
+        </div>
+        <div class="card">
+          <div class="between"><div class="tile-ico bg-coral">🌍</div><span class="chip">Weekly</span></div>
+          <h3 class="mt-2">Curiosity question</h3>
+          <p class="muted tiny mt-1">Pick a "why" question &amp; find the answer.</p>
+          <div class="between mt-2 tiny muted"><span>New!</span><span>+20 ⭐</span></div>
+        </div>
+        <div class="card" style="border-style:dashed; display:flex; align-items:center; justify-content:center; text-align:center; color:var(--muted);">
+          <div><div style="font-size:30px;">➕</div><div class="mt-1" style="font-weight:700;">Add a routine</div><div class="tiny">from a template or your own</div></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+</body>
+</html>

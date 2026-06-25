@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>North Star — Implementation Plan</title>
+<link rel="stylesheet" href="mocks/assets/styles.css" />
+<style>
+  .doc { max-width: 960px; margin: 0 auto; padding: 40px 24px 90px; }
+  .doc h1 { font-size: 34px; letter-spacing: -.5px; }
+  .doc h2 { font-size: 21px; margin: 34px 0 12px; padding-bottom: 8px; border-bottom: 2px solid var(--line); }
+  .doc h3 { font-size: 16px; margin: 20px 0 8px; color: var(--ink); }
+  .doc p, .doc li { color: var(--ink-soft); font-size: 14.5px; line-height: 1.7; }
+  .doc ul { margin: 8px 0; padding-left: 22px; }
+  .doc li { margin: 4px 0; }
+  .doc code { background: #eef0fb; color: #3b46b5; padding: 2px 6px; border-radius: 6px; font-size: 13px; font-family: "Cascadia Code", Consolas, monospace; }
+  .doc pre { background: var(--navy-900); color: #d7dbff; padding: 18px 20px; border-radius: 14px; overflow:auto; font-size: 13px; line-height: 1.55; font-family: "Cascadia Code", Consolas, monospace; }
+  .doc pre .c { color: #7e86c8; }
+  .lead { font-size: 16px; color: var(--ink-soft); }
+  .ms { display: grid; grid-template-columns: 64px 1fr; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .ms:last-child { border-bottom: 0; }
+  .ms .tag { font-weight: 800; color: var(--indigo-500); }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+  table.dec td { font-size: 14px; }
+  table.dec td:first-child { font-weight: 700; color: var(--ink); white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="mockbar">★ <b>North Star</b> · Full implementation plan — companion to <b>PRD.md</b></div>
+<div class="doc">
+
+  <div class="row" style="align-items:center; gap:14px;">
+    <div class="logo" style="width:52px;height:52px;border-radius:14px;background:linear-gradient(140deg,var(--star),var(--star-deep));display:grid;place-items:center;font-size:26px;box-shadow:0 10px 26px rgba(245,166,35,.4);">★</div>
+    <div>
+      <h1 style="margin:0;">Implementation Plan</h1>
+      <p class="muted tiny" style="margin-top:2px;">North Star · v0.1 · 2026-06-25</p>
+    </div>
+  </div>
+
+  <h2>Context</h2>
+  <p class="lead">The repo is greenfield — only <code>docs/PRD.md</code> and <code>docs/mocks/</code> exist. This plan implements the full product the PRD describes, test-first, across three folders: <code>backend/</code> (.NET 8), <code>frontend/</code> (Angular 17.2.2), and <code>e2e/</code> (Playwright).</p>
+  <p>Methodology is <b>ATDD</b>: every feature begins with a failing acceptance test, followed by the radically-simplest implementation that makes it pass.</p>
+
+  <h3>Confirmed decisions</h3>
+  <table class="dec">
+    <tr><td>Database</td><td>SQL Server via EF Core 8.</td></tr>
+    <tr><td>AI engine</td><td>Stubbed behind interfaces now (seeded fake provider + rules-based matcher). Real Claude API + scraping is a clearly-marked future milestone.</td></tr>
+    <tr><td>Auth</td><td>Full ASP.NET Core Identity + JWT + roles (Owner / Child / Mentor) with parent-managed child PIN login.</td></tr>
+    <tr><td>Run &amp; CI</td><td>Docker Compose local stack + GitHub Actions (unit / integration / acceptance + Playwright e2e).</td></tr>
+  </table>
+
+  <h2>Repository layout</h2>
+<pre><span class="c"># greenfield → target structure</span>
+north-star/
+  backend/
+    NorthStar.sln
+    src/
+      NorthStar.Domain/          <span class="c"># entities, value objects, enums — no external deps</span>
+      NorthStar.Application/      <span class="c"># CQRS use-cases (MediatR), DTOs, validators, PORTS</span>
+      NorthStar.Infrastructure/  <span class="c"># EF Core (SQL Server), Identity, repos, AI stubs</span>
+      NorthStar.Api/             <span class="c"># ASP.NET Core host, thin controllers, DI, auth</span>
+    tests/
+      NorthStar.Domain.Tests/
+      NorthStar.Application.Tests/
+      NorthStar.Acceptance.Tests/  <span class="c"># ATDD layer — drives the API end-to-end</span>
+  frontend/                      <span class="c"># Angular 17.2.2 (scss, routing)</span>
+    src/app/{core,shared,features,styles}/
+  e2e/                           <span class="c"># Playwright + Page Object Model (TypeScript)</span>
+    {pages,components,fixtures,tests}/
+  docs/                          <span class="c"># PRD.md, mocks/, IMPLEMENTATION_PLAN.html</span>
+  docker-compose.yml
+  .github/workflows/ci.yml
+  README.md</pre>
+
+  <h2>Backend — Clean Architecture, file-per-type, SOLID</h2>
+  <p><b>Dependency rule (inward only):</b> <code>Api → Infrastructure → Application → Domain</code>. Domain depends on nothing.</p>
+  <ul>
+    <li><b>Domain</b> — aggregates &amp; entities: <code>Family</code>, <code>AppUser</code>, <code>ChildProfile</code>, <code>Routine</code>, <code>RoutineLog</code>, <code>Project</code>, <code>Artifact</code>, <code>Activity</code>, <code>ActivityLog</code>, <code>Opportunity</code>, <code>OpportunityMatch</code>, <code>Badge</code>, <code>Milestone</code>, <code>Resource</code>, <code>ConsentRecord</code>. Value objects: <code>Streak</code>, <code>StarPoints</code>, <code>DateRange</code>, <code>GradeBand</code>, <code>MatchScore</code>. One public type per file.</li>
+    <li><b>Application</b> — vertical slices under <code>Features/&lt;Area&gt;/</code> with <b>MediatR</b> commands/queries + handlers, DTOs, <b>FluentValidation</b> validators, pipeline behaviors. Defines <b>ports</b>: <code>IFamilyRepository</code>, <code>IChildProfileRepository</code>, <code>IRoutineRepository</code>, <code>IUnitOfWork</code>, <code>ICurrentUser</code>, <code>IClock</code>, <code>IJwtTokenService</code>, <code>IOpportunityProvider</code>, <code>IScholarshipMatcher</code>, <code>IEmailSender</code>.</li>
+    <li><b>Infrastructure</b> — <code>NorthStarDbContext</code> (SQL Server), one <code>IEntityTypeConfiguration&lt;T&gt;</code> per entity, EF migrations, repositories, ASP.NET Core Identity + role seeding, JWT token service, <code>SeededScholarshipProvider</code> + <code>RulesScholarshipMatcher</code> (AI stubs), <code>NoOpEmailSender</code>.</li>
+    <li><b>Api</b> — <code>Program.cs</code> composition root, <b>thin controllers</b> (one per aggregate) translating HTTP ↔ MediatR, JWT auth + role policies, global exception middleware, Swagger, health checks, CORS.</li>
+  </ul>
+  <h3>ATDD harness</h3>
+  <p><code>NorthStar.Acceptance.Tests</code> uses xUnit + <code>WebApplicationFactory&lt;Program&gt;</code> driving the real API via <code>HttpClient</code>, against a real <b>SQL Server in Docker</b> through <code>Testcontainers.MsSql</code>. Tests are Given/When/Then with helper builders + <code>FluentAssertions</code>.</p>
+  <p><b>Per-feature loop:</b> (1) failing acceptance test → (2) thinnest API→handler→repo→EF slice to go green → (3) refactor + focused unit tests → (4) Angular feature → (5) Playwright e2e for the same flow.</p>
+
+  <h2>Frontend — Angular 17.2.2, file-per-type, BEM</h2>
+  <ul>
+    <li>Pinned to <b>17.2.2</b>, <code>--style=scss --routing</code>. Standalone components, <b>signals</b>, <b>typed reactive forms</b>, lazy-loaded routes.</li>
+    <li><b>File-per-type / NO single-file components:</b> every component is three files — <code>.ts</code> (always <code>templateUrl</code>/<code>styleUrls</code>), <code>.html</code>, <code>.scss</code>. Enforced via <code>angular.json</code> schematics + an <code>angular-eslint</code> rule.</li>
+    <li><b>BEM CSS</b> everywhere: <code>block__element--modifier</code> (e.g. <code>.ns-card__header</code>, <code>.task--done</code>). The mock CSS is ported into componentized BEM SCSS + global <code>styles/_tokens.scss</code> &amp; <code>_base.scss</code>.</li>
+    <li><b>Structure:</b> <code>core/</code> (auth interceptor, guards, typed API services), <code>shared/</code> (design-system components <code>ns-card</code>, <code>ns-button</code>, <code>ns-badge</code>, <code>ns-progress</code>, <code>ns-streak</code>, <code>ns-stat</code>, plus sidebar/topbar shells), <code>features/</code> (auth, dashboard-child, dashboard-parent, routines, portfolio, sports, scholarships, resources, settings), <code>styles/</code> (tokens, kid vs parent themes).</li>
+    <li>Unit tests: Angular CLI default Karma/Jasmine.</li>
+  </ul>
+
+  <h2>e2e — Playwright, Page Object Model</h2>
+  <ul>
+    <li>Standalone TypeScript project with <code>@playwright/test</code> + <code>playwright.config.ts</code> (runs against the compose stack).</li>
+    <li><b>POM:</b> <code>pages/</code> (LoginPage, ChildDashboardPage, ParentDashboardPage, RoutinesPage, PortfolioPage, ScholarshipsPage, SportsPage, ResourcesPage), <code>components/</code> (Sidebar, TopBar), <code>fixtures/</code> (auth + seeded data via API), <code>tests/</code> (one spec per major flow).</li>
+    <li><b>Flows:</b> parent register/login → add child → child completes "today's 3 things" &amp; streak increments → create project + artifact/reflection → log sport practice + milestone → scholarship matches save/dismiss + parent approval → browse resources.</li>
+  </ul>
+
+  <h2>Infrastructure — Docker Compose + GitHub Actions</h2>
+  <ul>
+    <li><b><code>docker-compose.yml</code>:</b> <code>mssql</code> (SQL Server 2022, healthcheck), <code>api</code> (multi-stage build, waits for db, applies migrations), <code>web</code> (Angular → nginx), optional <code>mailhog</code>.</li>
+    <li><b><code>.github/workflows/ci.yml</code>:</b> jobs — backend (build/test incl. acceptance via Testcontainers), frontend (lint/build/unit), e2e (compose up → Playwright → upload report). On push + PR.</li>
+  </ul>
+
+  <h2>Milestones — each delivered ATDD-style</h2>
+  <div class="ms"><div class="tag">M0</div><div><b>Walking skeleton &amp; foundations.</b> Solution + 4 projects + test projects, Angular workspace, e2e scaffold, docker-compose, CI skeleton. First red→green: <i>register family owner → login returns JWT</i> + app shell renders. Also renders this HTML plan.</div></div>
+  <div class="ms"><div class="tag">M1</div><div><b>Accounts &amp; family.</b> Parent register/login, create child profile (grade/interests), child PIN login, role enforcement. Auth pages + parent/child shells. e2e: onboarding.</div></div>
+  <div class="ms"><div class="tag">M2</div><div><b>Study routines (core daily loop).</b> Routine templates → "today's plan"; complete routine → stars + streak; weekly completion %. Child <i>Today</i> + Routines screens. e2e.</div></div>
+  <div class="ms"><div class="tag">M3</div><div><b>Projects &amp; portfolio.</b> Create project, add artifact + reflection, timeline, showcase flag. Portfolio screen. e2e.</div></div>
+  <div class="ms"><div class="tag">M4</div><div><b>Sports &amp; activities.</b> Activities/teams, practice/game logs, personal-best milestones, season summary. Sports screen. e2e.</div></div>
+  <div class="ms"><div class="tag">M5</div><div><b>Scholarships (stubbed AI).</b> <code>IOpportunityProvider</code> (seeded) + <code>IScholarshipMatcher</code> (rules: eligibility + horizon). Matched feed, save/dismiss, parent approval, deadline reminders. Finder + approvals screens. <i>Real scraping + Claude extraction deferred behind these interfaces.</i></div></div>
+  <div class="ms"><div class="tag">M6</div><div><b>Resources, gamification &amp; parent digest.</b> Seeded resources library, badges/milestones, computed weekly digest (email stub). Screens + e2e.</div></div>
+  <div class="ms"><div class="tag">M7</div><div><b>Hardening.</b> COPPA-style consent gating, security pass (rate limiting, validation, RBAC tests), accessibility (WCAG 2.2 AA), observability (Serilog, health), performance.</div></div>
+
+  <h2>Key libraries</h2>
+  <div class="pill-row">
+    <span class="chip on">.NET 8</span><span class="chip on">EF Core 8 (SqlServer)</span><span class="chip on">ASP.NET Identity</span><span class="chip on">MediatR</span><span class="chip on">FluentValidation</span><span class="chip on">Serilog</span><span class="chip on">xUnit</span><span class="chip on">FluentAssertions</span><span class="chip on">Testcontainers.MsSql</span><span class="chip on">NSubstitute</span>
+  </div>
+  <div class="pill-row">
+    <span class="chip">Angular 17.2.2</span><span class="chip">RxJS</span><span class="chip">SCSS</span><span class="chip">angular-eslint</span><span class="chip">Karma/Jasmine</span><span class="chip">@playwright/test</span>
+  </div>
+
+  <h2>Verification</h2>
+  <ul>
+    <li><code>docker compose up</code> → db + api + web healthy; smoke-check endpoints &amp; UI shell.</li>
+    <li>Backend: <code>dotnet test</code> (unit + acceptance on Testcontainers SQL).</li>
+    <li>Frontend: <code>ng lint</code>, <code>ng test</code>, <code>ng build</code>.</li>
+    <li>e2e: <code>npx playwright test</code> against the compose stack; HTML report.</li>
+    <li>CI green on push/PR (all three jobs). Per milestone: that milestone's acceptance + Playwright flows pass.</li>
+  </ul>
+
+  <h2>Defaults chosen (changeable)</h2>
+  <ul>
+    <li>Thin controllers over minimal-API endpoint classes.</li>
+    <li>xUnit Given/When/Then over SpecFlow/Reqnroll <code>.feature</code> files.</li>
+    <li>Karma/Jasmine over Jest for Angular unit tests.</li>
+    <li>Testcontainers SQL Server for acceptance tests (vs in-memory/SQLite) for prod fidelity.</li>
+  </ul>
+
+  <p class="muted tiny mt-3 center">Companion to <code>docs/PRD.md</code> · build strictly M0 → M7, following the per-feature ATDD loop within each milestone.</p>
+</div>
+</body>
+</html>

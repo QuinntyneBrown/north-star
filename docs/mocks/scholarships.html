@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>North Star — Scholarship Finder (AI)</title>
+<link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+<div class="mockbar">★ <b>North Star</b> · AI scholarship &amp; opportunity finder — mockup</div>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="logo">★</div><div class="name">North Star<small>FOLLOW YOUR STAR</small></div></div>
+    <nav class="nav">
+      <div class="nav-label">Parent</div>
+      <a href="dashboard-parent.html"><span class="ico">📊</span> Overview</a>
+      <a class="active" href="scholarships.html"><span class="ico">🔭</span> Scholarships</a>
+      <a href="resources.html"><span class="ico">📚</span> Resources</a>
+      <a href="#"><span class="ico">✅</span> Approvals <span class="badge badge-warn" style="margin-left:auto;">2</span></a>
+      <a href="#"><span class="ico">⚙️</span> Settings &amp; Privacy</a>
+      <div class="nav-label">Maya's space</div>
+      <a href="dashboard-child.html"><span class="ico">🌟</span> Today</a>
+      <a href="portfolio.html"><span class="ico">🎨</span> Portfolio</a>
+      <a href="sports.html"><span class="ico">🏅</span> Sports</a>
+    </nav>
+    <div class="side-card">
+      <b>🤖 AI radar is on</b><br />
+      <span class="muted">Last scan: 2h ago · 6 sources</span><br />
+      <span class="muted">Next scan: tonight 2:00 AM</span>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="greet"><h1>Scholarship Finder 🔭</h1><p>AI-matched scholarships, contests &amp; programs for Maya — verified before you act on them.</p></div>
+      <div class="tools">
+        <div class="search">🔎 <input placeholder="Search opportunities…" /></div>
+        <button class="btn btn-sm">🔄 Re-scan now</button>
+        <div class="avatar av-david">D</div>
+      </div>
+    </header>
+
+    <main class="content">
+      <!-- Pipeline status strip -->
+      <section class="card" style="background:linear-gradient(120deg, rgba(79,90,224,.05), rgba(68,214,192,.05));">
+        <div class="between wrap" style="gap:14px;">
+          <div class="row wrap" style="gap:26px;">
+            <div class="stat"><div class="k">🌐 Sources scanned</div><div class="v" style="font-size:22px;">6</div></div>
+            <div class="stat"><div class="k">📥 Found this week</div><div class="v" style="font-size:22px;">128</div></div>
+            <div class="stat"><div class="k">🎯 Matched to Maya</div><div class="v" style="font-size:22px;">11</div></div>
+            <div class="stat"><div class="k">🛡️ In review queue</div><div class="v" style="font-size:22px;">4</div></div>
+          </div>
+          <div class="tiny muted" style="max-width:280px;">
+            Pipeline: <b>fetch → AI extract → verify → match</b>. Low-confidence items are held for review. Always check the source before applying.
+          </div>
+        </div>
+      </section>
+
+      <!-- Filters -->
+      <div class="between wrap mt-3" style="gap:12px;">
+        <div class="row wrap gap-sm">
+          <span class="chip on">⭐ Eligible now · 3</span>
+          <span class="chip">🌱 Prepare now · 5</span>
+          <span class="chip">🌟 Aspirational · 3</span>
+        </div>
+        <div class="row wrap gap-sm">
+          <span class="chip">Type: All</span>
+          <span class="chip">Interest: Writing, STEM</span>
+          <span class="chip">Region: Canada</span>
+          <span class="chip">Sort: Best match</span>
+        </div>
+      </div>
+
+      <!-- Featured match (detailed) -->
+      <section class="card pad-lg mt-3">
+        <div class="opp">
+          <div class="top">
+            <div class="row" style="gap:16px; align-items:flex-start;">
+              <div class="match-ring" style="--p:92; width:64px; height:64px;"><i style="width:50px;height:50px;">92%</i></div>
+              <div>
+                <div class="row gap-sm wrap" style="align-items:center;">
+                  <h2 style="font-size:20px;">Young Writers Prize 2026</h2>
+                  <span class="badge badge-ok">⭐ Eligible now</span>
+                  <span class="badge badge-warn">⏰ 51 days left</span>
+                </div>
+                <p class="muted mt-1">Contest · National Literacy Foundation · ages 8–11 · free to enter</p>
+                <div class="row wrap gap-sm mt-2">
+                  <span class="chip">✍️ Writing</span><span class="chip">🏆 Contest</span><span class="chip">💰 $500 + publication</span>
+                </div>
+              </div>
+            </div>
+            <div class="stack" style="gap:8px; align-items:flex-end;">
+              <button class="btn btn-primary">💾 Save to plan</button>
+              <button class="btn btn-sm">Dismiss</button>
+            </div>
+          </div>
+
+          <!-- Why matched -->
+          <div class="grid cols-2 mt-2" style="grid-template-columns: 1.3fr 1fr;">
+            <div class="card" style="background:rgba(79,90,224,.05); border-color:rgba(79,90,224,.2);">
+              <div class="eyebrow">🤖 Why this matched Maya</div>
+              <ul style="margin:10px 0 0; padding-left:18px; color:var(--ink-soft); font-size:13.5px; line-height:1.7;">
+                <li><b>Grade 5 / age 9</b> fits the 8–11 eligibility window.</li>
+                <li>Matches her <b>Writing</b> interest and active project "The Brave Little Crab."</li>
+                <li>Effort is <b>low–medium</b> — a 300-word story she's already drafting.</li>
+                <li>Open to <b>Canada</b>, her region.</li>
+              </ul>
+            </div>
+            <div class="card" style="border-style:dashed;">
+              <div class="eyebrow">✅ Do this now</div>
+              <div class="task mt-1" style="padding:10px;"><div class="t-ico">✍️</div><div class="grow"><div class="t-title" style="font-size:14px;">Finish story draft</div><div class="t-meta">links to her portfolio project</div></div></div>
+              <div class="task" style="padding:10px;"><div class="t-ico">👀</div><div class="grow"><div class="t-title" style="font-size:14px;">Parent review &amp; submit</div><div class="t-meta">by Aug 15</div></div></div>
+            </div>
+          </div>
+
+          <!-- Provenance -->
+          <div class="between wrap mt-2 tiny muted" style="gap:10px;">
+            <div class="row wrap gap-sm">
+              <span class="badge badge-ok">🛡️ Verified by reviewer</span>
+              <span class="badge badge-soft">Confidence 0.96</span>
+              <span class="badge badge-soft">🔗 Source: literacyfoundation.org</span>
+            </div>
+            <span>Extracted by AI · last verified 2h ago · <a class="link" href="#">view source page ↗</a></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- More matches list -->
+      <div class="section-title"><h2>More matches</h2><span class="link">View all 11</span></div>
+      <div class="grid cols-2">
+        <div class="card opp">
+          <div class="top">
+            <div class="row" style="gap:14px;"><div class="match-ring" style="--p:78;"><i>78%</i></div>
+              <div><div class="row gap-sm wrap"><h3>STEM Stars Junior Grant</h3><span class="badge badge-info">🌱 Prepare</span></div>
+              <p class="muted tiny mt-1">Program · apply in Grade 7 · $1,000 toward a science project</p></div></div>
+            <button class="btn btn-sm">Save</button>
+          </div>
+          <p class="muted tiny">🤖 Build a documented science project now so it's ready in two years. Her volcano experiment is a great start.</p>
+          <div class="row wrap gap-sm tiny muted"><span class="badge badge-soft">Conf 0.88</span><span class="badge badge-soft">🔗 stemstars.org</span></div>
+        </div>
+
+        <div class="card opp">
+          <div class="top">
+            <div class="row" style="gap:14px;"><div class="match-ring" style="--p:71;"><i>71%</i></div>
+              <div><div class="row gap-sm wrap"><h3>Backyard Science Challenge</h3><span class="badge badge-ok">⭐ Eligible</span><span class="badge badge-warn">⏰ 12 days</span></div>
+              <p class="muted tiny mt-1">Contest · ages 7–12 · prize kit + feature</p></div></div>
+            <button class="btn btn-sm">Save</button>
+          </div>
+          <p class="muted tiny">🤖 Directly matches her completed volcano project — just add photos + a short writeup.</p>
+          <div class="row wrap gap-sm tiny muted"><span class="badge badge-warn">🛡️ Needs review</span><span class="badge badge-soft">Conf 0.74</span><span class="badge badge-soft">🔗 sciencekids.org</span></div>
+        </div>
+
+        <div class="card opp">
+          <div class="top">
+            <div class="row" style="gap:14px;"><div class="match-ring" style="--p:64;"><i>64%</i></div>
+              <div><div class="row gap-sm wrap"><h3>Community Art Award</h3><span class="badge badge-soft">🌟 Aspirational</span></div>
+              <p class="muted tiny mt-1">Award · regional · revisit in Grade 6</p></div></div>
+            <button class="btn btn-sm">Save</button>
+          </div>
+          <p class="muted tiny">🤖 Her Ocean mural could qualify next year once it's finished &amp; displayed publicly.</p>
+          <div class="row wrap gap-sm tiny muted"><span class="badge badge-soft">Conf 0.81</span><span class="badge badge-soft">🔗 cityarts.ca</span></div>
+        </div>
+
+        <div class="card opp">
+          <div class="top">
+            <div class="row" style="gap:14px;"><div class="match-ring" style="--p:59;"><i>59%</i></div>
+              <div><div class="row gap-sm wrap"><h3>Junior Coders Showcase</h3><span class="badge badge-info">🌱 Prepare</span></div>
+              <p class="muted tiny mt-1">Program · ages 9–13 · share a Scratch project</p></div></div>
+            <button class="btn btn-sm">Save</button>
+          </div>
+          <p class="muted tiny">🤖 Her Scratch animation fits — polish it and submit when entries open in fall.</p>
+          <div class="row wrap gap-sm tiny muted"><span class="badge badge-soft">Conf 0.86</span><span class="badge badge-soft">🔗 juniorcoders.org</span></div>
+        </div>
+      </div>
+
+      <p class="muted tiny mt-3 center">North Star surfaces <b>leads to verify</b>, not guarantees. Always confirm eligibility &amp; deadlines on the official source before applying. We never auto-submit applications.</p>
+    </main>
+  </div>
+</div>
+</body>
+</html>

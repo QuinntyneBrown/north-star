@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>North Star — Parent Dashboard</title>
+<link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+<div class="mockbar">★ <b>North Star</b> · Parent dashboard (David, parent of Maya) — mockup</div>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">★</div>
+      <div class="name">North Star<small>FOLLOW YOUR STAR</small></div>
+    </div>
+    <nav class="nav">
+      <div class="nav-label">Parent</div>
+      <a class="active" href="dashboard-parent.html"><span class="ico">📊</span> Overview</a>
+      <a href="scholarships.html"><span class="ico">🔭</span> Scholarships</a>
+      <a href="resources.html"><span class="ico">📚</span> Resources</a>
+      <a href="#"><span class="ico">✅</span> Approvals <span class="badge badge-warn" style="margin-left:auto;">2</span></a>
+      <a href="#"><span class="ico">⚙️</span> Settings &amp; Privacy</a>
+      <div class="nav-label">Maya's space</div>
+      <a href="dashboard-child.html"><span class="ico">🌟</span> Today</a>
+      <a href="routines.html"><span class="ico">✅</span> Routines</a>
+      <a href="portfolio.html"><span class="ico">🎨</span> Portfolio</a>
+      <a href="sports.html"><span class="ico">🏅</span> Sports</a>
+    </nav>
+    <div class="side-card">
+      <b>👧 Maya · Grade 5</b><br />
+      <span class="muted">5 years to scholarship season</span>
+      <div class="progress grape mt-2"><span style="width:18%"></span></div>
+      <div class="tiny muted mt-1">Grade 5 → 12 journey · 18%</div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="greet">
+        <h1>Good evening, David 👋</h1>
+        <p>Here's Maya's week at a glance — June 19–25.</p>
+      </div>
+      <div class="tools">
+        <div class="search">🔎 <input placeholder="Search…" /></div>
+        <button class="btn btn-primary btn-sm">Weekly digest ✉️</button>
+        <div class="avatar av-david">D</div>
+      </div>
+    </header>
+
+    <main class="content">
+      <!-- KPI row -->
+      <div class="grid cols-4">
+        <div class="card stat">
+          <div class="k"><span class="tile-ico bg-star" style="width:32px;height:32px;font-size:17px;">🔥</span> Current streak</div>
+          <div class="v">9 <small>days</small></div>
+          <div class="delta up">▲ best yet</div>
+        </div>
+        <div class="card stat">
+          <div class="k"><span class="tile-ico bg-mint" style="width:32px;height:32px;font-size:17px;">✅</span> Routines this week</div>
+          <div class="v">86<small>%</small></div>
+          <div class="delta up">▲ 12% vs last week</div>
+        </div>
+        <div class="card stat">
+          <div class="k"><span class="tile-ico bg-grape" style="width:32px;height:32px;font-size:17px;">🎨</span> Portfolio items</div>
+          <div class="v">14</div>
+          <div class="delta up">▲ 2 new this week</div>
+        </div>
+        <div class="card stat">
+          <div class="k"><span class="tile-ico bg-sky" style="width:32px;height:32px;font-size:17px;">🔭</span> New matches</div>
+          <div class="v">3</div>
+          <div class="delta up">2 deadlines soon</div>
+        </div>
+      </div>
+
+      <div class="grid cols-2 mt-3" style="grid-template-columns: 1.4fr 1fr;">
+        <!-- Weekly activity -->
+        <section class="card pad-lg">
+          <div class="section-title" style="margin:0 0 18px;"><h2>This week's activity</h2><span class="link">View report</span></div>
+          <div class="row" style="align-items:flex-end; gap:14px; height:170px;">
+            <!-- simple bar chart -->
+            <div style="flex:1; text-align:center;">
+              <div style="height:120px; display:flex; align-items:flex-end; justify-content:center;"><div style="width:60%; height:90%; border-radius:8px 8px 0 0; background:linear-gradient(180deg,var(--mint),var(--sky));"></div></div>
+              <div class="tiny muted mt-1">Mon</div>
+            </div>
+            <div style="flex:1; text-align:center;">
+              <div style="height:120px; display:flex; align-items:flex-end; justify-content:center;"><div style="width:60%; height:100%; border-radius:8px 8px 0 0; background:linear-gradient(180deg,var(--mint),var(--sky));"></div></div>
+              <div class="tiny muted mt-1">Tue</div>
+            </div>
+            <div style="flex:1; text-align:center;">
+              <div style="height:120px; display:flex; align-items:flex-end; justify-content:center;"><div style="width:60%; height:70%; border-radius:8px 8px 0 0; background:linear-gradient(180deg,var(--mint),var(--sky));"></div></div>
+              <div class="tiny muted mt-1">Wed</div>
+            </div>
+            <div style="flex:1; text-align:center;">
+              <div style="height:120px; display:flex; align-items:flex-end; justify-content:center;"><div style="width:60%; height:100%; border-radius:8px 8px 0 0; background:linear-gradient(180deg,var(--mint),var(--sky));"></div></div>
+              <div class="tiny muted mt-1">Thu</div>
+            </div>
+            <div style="flex:1; text-align:center;">
+              <div style="height:120px; display:flex; align-items:flex-end; justify-content:center;"><div style="width:60%; height:80%; border-radius:8px 8px 0 0; background:linear-gradient(180deg,var(--mint),var(--sky));"></div></div>
+              <div class="tiny muted mt-1">Fri</div>
+            </div>
+            <div style="flex:1; text-align:center;">
+              <div style="height:120px; display:flex; align-items:flex-end; justify-content:center;"><div style="width:60%; height:55%; border-radius:8px 8px 0 0; background:linear-gradient(180deg,var(--star),var(--star-deep));"></div></div>
+              <div class="tiny muted mt-1">Sat</div>
+            </div>
+            <div style="flex:1; text-align:center;">
+              <div style="height:120px; display:flex; align-items:flex-end; justify-content:center;"><div style="width:60%; height:40%; border-radius:8px 8px 0 0; background:var(--line);"></div></div>
+              <div class="tiny muted mt-1">Sun</div>
+            </div>
+          </div>
+          <div class="row mt-2 tiny muted" style="gap:18px;">
+            <span>🟦 Study &amp; reading</span><span>🟨 Sports</span><span>⬜ Planned</span>
+          </div>
+        </section>
+
+        <!-- Approvals queue -->
+        <section class="card">
+          <div class="section-title" style="margin:0 0 8px;"><h2>Needs your OK</h2><span class="badge badge-warn">2 pending</span></div>
+          <div class="list">
+            <div class="item">
+              <div class="tile-ico bg-coral">🖊️</div>
+              <div class="grow">
+                <h4>Enter "Kids' Short Story Contest"</h4>
+                <p>National · ages 8–11 · free · deadline Aug 15</p>
+              </div>
+            </div>
+            <div class="row gap-sm" style="margin:6px 0 14px;">
+              <button class="btn btn-primary btn-sm">Approve</button>
+              <button class="btn btn-sm">Review</button>
+              <button class="btn btn-ghost btn-sm muted">Dismiss</button>
+            </div>
+            <div class="item">
+              <div class="tile-ico bg-sky">📷</div>
+              <div class="grow">
+                <h4>Add 3 photos to portfolio</h4>
+                <p>Maya wants to attach "Ocean mural" progress pics</p>
+              </div>
+            </div>
+            <div class="row gap-sm" style="margin:6px 0 0;">
+              <button class="btn btn-primary btn-sm">Approve</button>
+              <button class="btn btn-sm">Review</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Scholarship matches + recent activity -->
+      <div class="grid cols-2 mt-3">
+        <section class="card">
+          <div class="section-title" style="margin:0 0 6px;"><h2>🔭 New scholarship matches</h2><a class="link" href="scholarships.html">Open finder</a></div>
+          <div class="list">
+            <div class="item">
+              <div class="match-ring" style="--p:92;"><i>92%</i></div>
+              <div class="grow">
+                <h4>Young Writers Prize <span class="badge badge-warn">⏰ 51 days</span></h4>
+                <p>Contest · Grade 5 eligible now · matches her writing interest</p>
+              </div>
+              <button class="btn btn-sm">Save</button>
+            </div>
+            <div class="item">
+              <div class="match-ring" style="--p:78;"><i>78%</i></div>
+              <div class="grow">
+                <h4>STEM Stars Junior Grant <span class="badge badge-info">Prepare</span></h4>
+                <p>Program · apply in Grade 7 · build a science project now</p>
+              </div>
+              <button class="btn btn-sm">Save</button>
+            </div>
+            <div class="item">
+              <div class="match-ring" style="--p:64;"><i>64%</i></div>
+              <div class="grow">
+                <h4>Community Art Award <span class="badge badge-soft">Aspirational</span></h4>
+                <p>Award · regional · revisit in Grade 6</p>
+              </div>
+              <button class="btn btn-sm">Save</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="section-title" style="margin:0 0 6px;"><h2>Recent activity</h2><span class="link">All</span></div>
+          <div class="timeline mt-1">
+            <div class="tl-item star">
+              <div class="between"><b>Earned "7-Day Streak" badge</b><span class="tiny muted">Today</span></div>
+              <p class="muted tiny">Completed routines 7 days in a row 🔥</p>
+            </div>
+            <div class="tl-item mint">
+              <div class="between"><b>Added artifact to "Ocean mural"</b><span class="tiny muted">Yesterday</span></div>
+              <p class="muted tiny">Photo + reflection: "Mixing blues was tricky"</p>
+            </div>
+            <div class="tl-item">
+              <div class="between"><b>Logged swim practice</b><span class="tiny muted">Mon</span></div>
+              <p class="muted tiny">45 min · personal best 50m freestyle</p>
+            </div>
+            <div class="tl-item">
+              <div class="between"><b>Finished "The Wild Robot" ch. 6</b><span class="tiny muted">Sun</span></div>
+              <p class="muted tiny">Reading streak continues</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+</body>
+</html>
