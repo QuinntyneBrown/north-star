@@ -1,0 +1,36 @@
+<div class="auth">
+  <form class="auth__card" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="auth__brand">
+      <span class="ns-logo auth__logo">🚀</span>
+      <div>
+        <h1 class="auth__title">Hi explorer!</h1>
+        <p class="auth__subtitle">Sign in with your handle and PIN</p>
+      </div>
+    </div>
+
+    @if (error()) {
+      <p class="auth__alert" role="alert">{{ error() }}</p>
+    }
+
+    <div class="ns-field">
+      <label class="ns-field__label" for="loginHandle">Your handle</label>
+      <input id="loginHandle" class="ns-field__input" type="text" formControlName="loginHandle"
+        autocomplete="username" placeholder="maya-star" />
+    </div>
+
+    <div class="ns-field">
+      <label class="ns-field__label" for="pin">PIN</label>
+      <input id="pin" class="ns-field__input" type="password" inputmode="numeric" formControlName="pin"
+        autocomplete="off" placeholder="••••" />
+      @if (form.controls.pin.touched && form.controls.pin.invalid) {
+        <span class="ns-field__error">Your PIN is 4–6 numbers.</span>
+      }
+    </div>
+
+    <button class="ns-btn ns-btn--star ns-btn--block" type="submit" [disabled]="submitting()">
+      {{ submitting() ? 'Beaming up…' : 'Let’s go! 🚀' }}
+    </button>
+
+    <p class="auth__hint ns-muted">Grown-up? <a routerLink="/login">Sign in here</a></p>
+  </form>
+</div>

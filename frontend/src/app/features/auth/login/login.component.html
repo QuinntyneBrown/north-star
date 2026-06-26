@@ -1,0 +1,40 @@
+<div class="auth">
+  <form class="auth__card" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="auth__brand">
+      <span class="ns-logo auth__logo">★</span>
+      <div>
+        <h1 class="auth__title">North Star</h1>
+        <p class="auth__subtitle">Sign in to guide today’s journey</p>
+      </div>
+    </div>
+
+    @if (error()) {
+      <p class="auth__alert" role="alert">{{ error() }}</p>
+    }
+
+    <div class="ns-field">
+      <label class="ns-field__label" for="email">Email</label>
+      <input id="email" class="ns-field__input" type="email" formControlName="email"
+        autocomplete="username" placeholder="parent@example.com" />
+      @if (form.controls.email.touched && form.controls.email.invalid) {
+        <span class="ns-field__error">Enter a valid email address.</span>
+      }
+    </div>
+
+    <div class="ns-field">
+      <label class="ns-field__label" for="password">Password</label>
+      <input id="password" class="ns-field__input" type="password" formControlName="password"
+        autocomplete="current-password" placeholder="••••••••" />
+      @if (form.controls.password.touched && form.controls.password.invalid) {
+        <span class="ns-field__error">Password is required.</span>
+      }
+    </div>
+
+    <button class="ns-btn ns-btn--primary ns-btn--block" type="submit" [disabled]="submitting()">
+      {{ submitting() ? 'Signing in…' : 'Sign in' }}
+    </button>
+
+    <p class="auth__hint ns-muted">New here? <a routerLink="/register">Create a family account</a></p>
+    <p class="auth__hint ns-muted">Are you a kid? <a routerLink="/child-login">Sign in with your PIN</a></p>
+  </form>
+</div>

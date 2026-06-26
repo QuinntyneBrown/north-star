@@ -1,0 +1,43 @@
+@if (plan(); as p) {
+  <div class="today">
+    <header class="today__head">
+      <div>
+        <h1 class="today__title">Today’s plan ⭐</h1>
+        <p class="today__sub">{{ doneCount() }} of {{ p.tasks.length }} done</p>
+      </div>
+      <div class="today__stats">
+        <span class="today__badge">🔥 {{ p.streak }}-day streak</span>
+        <span class="today__badge today__badge--star">⭐ {{ p.starsToday }} today</span>
+      </div>
+    </header>
+
+    @if (error()) {
+      <p class="auth__alert" role="alert">{{ error() }}</p>
+    }
+
+    <div class="today__progress"><span [style.width.%]="p.completionPercent"></span></div>
+
+    <ul class="today__list">
+      @for (task of p.tasks; track task.routineId) {
+        <li class="today__task" [class.today__task--done]="task.done">
+          <button
+            class="today__check"
+            type="button"
+            [disabled]="task.done || busyId() === task.routineId"
+            (click)="complete(task.routineId)"
+            [attr.aria-label]="'Complete ' + task.title"
+          >{{ task.done ? '✓' : '' }}</button>
+          <span class="today__icon">{{ task.icon }}</span>
+          <span class="today__name">{{ task.title }}</span>
+          <span class="today__reward">+{{ task.starReward }} ⭐</span>
+        </li>
+      }
+    </ul>
+
+    <a class="auth__hint" routerLink="/dashboard">← Back to dashboard</a>
+  </div>
+} @else if (!error()) {
+  <p class="today__loading">Loading…</p>
+} @else {
+  <p class="today__loading">{{ error() }}</p>
+}

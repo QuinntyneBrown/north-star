@@ -1,0 +1,50 @@
+<div class="auth">
+  <form class="auth__card" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="auth__brand">
+      <span class="ns-logo auth__logo">★</span>
+      <div>
+        <h1 class="auth__title">Create your family</h1>
+        <p class="auth__subtitle">Start guiding the journey to a scholarship</p>
+      </div>
+    </div>
+
+    @if (error()) {
+      <p class="auth__alert" role="alert">{{ error() }}</p>
+    }
+
+    <div class="auth__row">
+      <div class="ns-field">
+        <label class="ns-field__label" for="displayName">Your name</label>
+        <input id="displayName" class="ns-field__input" type="text" formControlName="displayName" placeholder="David" />
+      </div>
+      <div class="ns-field">
+        <label class="ns-field__label" for="familyName">Family name</label>
+        <input id="familyName" class="ns-field__input" type="text" formControlName="familyName" placeholder="Brown Family" />
+      </div>
+    </div>
+
+    <div class="ns-field">
+      <label class="ns-field__label" for="email">Email</label>
+      <input id="email" class="ns-field__input" type="email" formControlName="email"
+        autocomplete="username" placeholder="parent@example.com" />
+      @if (form.controls.email.touched && form.controls.email.invalid) {
+        <span class="ns-field__error">Enter a valid email address.</span>
+      }
+    </div>
+
+    <div class="ns-field">
+      <label class="ns-field__label" for="password">Password</label>
+      <input id="password" class="ns-field__input" type="password" formControlName="password"
+        autocomplete="new-password" placeholder="At least 8 characters" />
+      @if (form.controls.password.touched && form.controls.password.invalid) {
+        <span class="ns-field__error">Use at least 8 characters.</span>
+      }
+    </div>
+
+    <button class="ns-btn ns-btn--primary ns-btn--block" type="submit" [disabled]="submitting()">
+      {{ submitting() ? 'Creating…' : 'Create account' }}
+    </button>
+
+    <p class="auth__hint ns-muted">Already have an account? <a routerLink="/login">Sign in</a></p>
+  </form>
+</div>

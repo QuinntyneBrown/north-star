@@ -1,0 +1,64 @@
+<section class="ns-card children">
+  <div class="children__head">
+    <h2 class="children__title">👧 Children</h2>
+    <button class="ns-btn ns-btn--sm" type="button" (click)="toggle()">
+      {{ showForm() ? 'Close' : '+ Add child' }}
+    </button>
+  </div>
+
+  @if (error()) {
+    <p class="auth__alert" role="alert">{{ error() }}</p>
+  }
+
+  @if (showForm()) {
+    <form class="children__form" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="auth__row">
+        <div class="ns-field">
+          <label class="ns-field__label" for="firstName">First name</label>
+          <input id="firstName" class="ns-field__input" formControlName="firstName" placeholder="Maya" />
+        </div>
+        <div class="ns-field">
+          <label class="ns-field__label" for="grade">Grade</label>
+          <input id="grade" class="ns-field__input" type="number" min="1" max="12" formControlName="grade" />
+        </div>
+      </div>
+
+      <div class="ns-field">
+        <label class="ns-field__label" for="interests">Interests</label>
+        <input id="interests" class="ns-field__input" formControlName="interests" placeholder="writing, science, art" />
+      </div>
+
+      <div class="auth__row">
+        <div class="ns-field">
+          <label class="ns-field__label" for="loginHandle">Login handle</label>
+          <input id="loginHandle" class="ns-field__input" formControlName="loginHandle" placeholder="maya-star" />
+        </div>
+        <div class="ns-field">
+          <label class="ns-field__label" for="childPin">PIN (4–6 digits)</label>
+          <input id="childPin" class="ns-field__input" type="password" inputmode="numeric" formControlName="pin" placeholder="••••" />
+        </div>
+      </div>
+
+      <button class="ns-btn ns-btn--primary" type="submit" [disabled]="saving()">
+        {{ saving() ? 'Saving…' : 'Save child' }}
+      </button>
+    </form>
+  }
+
+  @if (items().length === 0) {
+    <p class="ns-muted children__empty">No children yet — add your first to begin the journey.</p>
+  } @else {
+    <ul class="children__list">
+      @for (child of items(); track child.id) {
+        <li class="children__item">
+          <span class="children__avatar">{{ child.firstName[0] }}</span>
+          <div class="children__info">
+            <h4 class="children__name">{{ child.firstName }}</h4>
+            <p class="children__meta ns-muted">Grade {{ child.grade }} · {{ child.interests || 'no interests yet' }}</p>
+          </div>
+          <a class="ns-btn ns-btn--sm" [routerLink]="['/children', child.id, 'today']">Today →</a>
+        </li>
+      }
+    </ul>
+  }
+</section>

@@ -1,0 +1,33 @@
+/* Design tokens — ported from the docs/mocks design system. */
+:root {
+  --navy-900: #0b1033;
+  --navy-800: #131a4a;
+  --navy-700: #1d2766;
+  --indigo-600: #3b46b5;
+  --indigo-500: #4f5ae0;
+
+  --star: #ffce4d;
+  --star-deep: #f5a623;
+  --mint: #44d6c0;
+  --coral: #ff7d8a;
+  --sky: #6db8ff;
+  --grape: #a78bfa;
+
+  --ink: #1a1f3c;
+  --ink-soft: #4a5070;
+  --muted: #858bab;
+  --line: #e7e9f4;
+  --bg: #f5f6fc;
+  --card: #ffffff;
+
+  --ok: #2bb673;
+  --warn: #f5a623;
+  --danger: #ef5366;
+
+  --radius: 18px;
+  --radius-sm: 12px;
+  --shadow-sm: 0 1px 2px rgba(18, 26, 74, 0.06), 0 2px 8px rgba(18, 26, 74, 0.05);
+  --shadow-md: 0 8px 28px rgba(18, 26, 74, 0.12);
+
+  --sans: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+}

@@ -1,0 +1,58 @@
+<div class="ns-shell">
+  <aside class="ns-shell__sidebar">
+    <div class="ns-brand">
+      <span class="ns-logo ns-brand__logo">★</span>
+      <span class="ns-brand__name">North Star<small>FOLLOW YOUR STAR</small></span>
+    </div>
+    <nav class="ns-nav">
+      <a class="ns-nav__item ns-nav__item--active">📊 Overview</a>
+      <a class="ns-nav__item">🔭 Scholarships</a>
+      <a class="ns-nav__item">📚 Resources</a>
+      <a class="ns-nav__item">🌟 Maya’s space</a>
+    </nav>
+  </aside>
+
+  <div class="ns-shell__main">
+    <header class="ns-shell__topbar">
+      <div>
+        <h1 class="dashboard__greeting">Good evening, {{ user()?.displayName ?? 'there' }} 👋</h1>
+        <p class="ns-muted dashboard__sub">Here’s the family at a glance.</p>
+      </div>
+      <div class="dashboard__tools">
+        <span class="ns-avatar">{{ (user()?.displayName ?? '?')[0] }}</span>
+        <button class="ns-btn ns-btn--ghost" type="button" (click)="logout()">Sign out</button>
+      </div>
+    </header>
+
+    <main class="ns-shell__content">
+      <div class="ns-grid ns-grid--4">
+        <div class="ns-card ns-stat">
+          <span class="ns-stat__label">🔥 Current streak</span>
+          <span class="ns-stat__value">—</span>
+        </div>
+        <div class="ns-card ns-stat">
+          <span class="ns-stat__label">✅ Routines this week</span>
+          <span class="ns-stat__value">—</span>
+        </div>
+        <div class="ns-card ns-stat">
+          <span class="ns-stat__label">🎨 Portfolio items</span>
+          <span class="ns-stat__value">—</span>
+        </div>
+        <div class="ns-card ns-stat">
+          <span class="ns-stat__label">🔭 New matches</span>
+          <span class="ns-stat__value">—</span>
+        </div>
+      </div>
+
+      <app-children-panel />
+
+      <div class="ns-card dashboard__welcome">
+        <h2>Welcome to North Star.</h2>
+        <p class="ns-muted">
+          Add your children above, then study routines, the portfolio, sports, and the
+          scholarship finder arrive in the next milestones — each built test-first.
+        </p>
+      </div>
+    </main>
+  </div>
+</div>
